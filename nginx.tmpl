@@ -117,6 +117,10 @@
     #         {{ .Name }} (unreachable)
             {{- continue }}
         {{- end }}
+        {{- if and (not (index $.globals.networks .Name)) (not $.globals.networks.host) }}
+    #         {{ .Name }} (unreachable)
+            {{- continue }}
+        {{- end }}
         {{- /*
              * Do not emit multiple `server` directives for this container if it
              * is reachable over multiple networks or multiple IP stacks. This avoids
